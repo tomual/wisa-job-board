@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201802241620322_DataAnnotations.Designer.cs">
       <DependentUpon>201802241620322_DataAnnotations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802242049422_OwnerID.cs" />
+    <Compile Include="Migrations\201802242049422_OwnerID.Designer.cs">
+      <DependentUpon>201802242049422_OwnerID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -307,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802241620322_DataAnnotations.resx">
       <DependentUpon>201802241620322_DataAnnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802242049422_OwnerID.resx">
+      <DependentUpon>201802242049422_OwnerID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

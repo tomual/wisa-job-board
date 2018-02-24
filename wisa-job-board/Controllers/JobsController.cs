@@ -9,11 +9,13 @@ using WisaJobBoard.Models;
 
 namespace WisaJobBoard.Controllers
 {
+    [Authorize]
     public class JobsController : Controller
     {
         private JobDBContext db = new JobDBContext();
 
         // GET: Jobs
+        [AllowAnonymous]
         public ActionResult Index(string search, string location)
         {
             var LocationList = new List<string>();
@@ -40,13 +42,8 @@ namespace WisaJobBoard.Controllers
             return View(jobs);
         }
 
-        [HttpPost]
-        public string Index(FormCollection fc, string search)
-        {
-            return "Hello " + search;
-        }
-
         // GET: Jobs/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)

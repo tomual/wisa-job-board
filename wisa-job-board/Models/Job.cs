@@ -11,6 +11,8 @@ namespace WisaJobBoard.Models
     {
         public int ID { get; set; }
 
+        public string OwnerID { get; set; }
+
         [StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
 

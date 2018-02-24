@@ -7,16 +7,20 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (Request.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+
 
     @using (Html.BeginForm("Index", "Jobs", FormMethod.Get))
     {
-        <p>Location: @Html.DropDownList("locations", "All")</p>
-        <p>
-            Title: @Html.TextBox("Search")<br />
-            <input type="submit" value="Filter" />
-        </p>
-    }
+    <p>Location: @Html.DropDownList("locations", "All")</p>
+    <p>
+        Title: @Html.TextBox("Search")<br />
+        <input type="submit" value="Filter" />
+    </p>
+}
     </p>
     <table class="table">
         <tr>
@@ -39,7 +43,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.ActionLink(item.Title, "Details", new { id = item.ID })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Location)
@@ -50,11 +54,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DatePosted)
                 </td>
+
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @if (Request.IsAuthenticated)
+                    {
+                        <span>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                        </span>
+                    }
                 </td>
+
             </tr>
         }
 
