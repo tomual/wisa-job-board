@@ -10,13 +10,22 @@ namespace WisaJobBoard.Models
     public class Job
     {
         public int ID { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
-        public string Department { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        public string Location { get; set; }
+
+        [Required]
         public string Description { get; set; }
+
         [Display(Name = "Date Posted")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DatePosted { get; set; }
+        
     }
 
     public class JobDBContext : DbContext

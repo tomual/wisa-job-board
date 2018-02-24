@@ -14,15 +14,15 @@ namespace WisaJobBoard.Controllers
         private JobDBContext db = new JobDBContext();
 
         // GET: Jobs
-        public ActionResult Index(string search, string test)
+        public ActionResult Index(string search, string location)
         {
-            var DepartmentList = new List<string>();
-            var DepartmentQuery = from d in db.Jobs
-                            orderby d.Description
-                            select d.Description;
+            var LocationList = new List<string>();
+            var LocationQuery = from d in db.Jobs
+                            orderby d.Location
+                            select d.Location;
 
-            DepartmentList.AddRange(DepartmentQuery.Distinct());
-            ViewBag.departments = new SelectList(DepartmentList);
+            LocationList.AddRange(LocationQuery.Distinct());
+            ViewBag.locations = new SelectList(LocationList);
 
             var jobs = from j in db.Jobs
                          select j;
@@ -32,9 +32,9 @@ namespace WisaJobBoard.Controllers
                 jobs = jobs.Where(s => s.Title.Contains(search));
             }
 
-            if(!String.IsNullOrEmpty(test))
+            if(!String.IsNullOrEmpty(location))
             {
-                jobs = jobs.Where(x => x.Description == test);
+                jobs = jobs.Where(x => x.Location == location);
             }
 
             return View(jobs);
@@ -72,7 +72,7 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,DatePosted")] Job job)
+        public ActionResult Create([Bind(Include = "ID,Title,Location,DatePosted")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,DatePosted")] Job job)
+        public ActionResult Edit([Bind(Include = "ID,Title,Location,DatePosted")] Job job)
         {
             if (ModelState.IsValid)
             {
