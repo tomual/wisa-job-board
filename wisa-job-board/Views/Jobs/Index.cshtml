@@ -8,6 +8,13 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+
+    @using (Html.BeginForm("Index", "Jobs", FormMethod.Get))
+    {
+        <p>Department: @Html.DropDownList("departments", "All")</p>
+        <p>Title: @Html.TextBox("Search")<br />
+        <input type="submit" value="Filter" /></p>
+    }
 </p>
 <table class="table">
     <tr>

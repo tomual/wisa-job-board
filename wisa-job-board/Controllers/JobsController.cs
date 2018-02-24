@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WisaJobBoard.Models;
 
@@ -15,9 +14,36 @@ namespace WisaJobBoard.Controllers
         private JobDBContext db = new JobDBContext();
 
         // GET: Jobs
-        public ActionResult Index()
+        public ActionResult Index(string search, string test)
         {
-            return View(db.Jobs.ToList());
+            var DepartmentList = new List<string>();
+            var DepartmentQuery = from d in db.Jobs
+                            orderby d.Description
+                            select d.Description;
+
+            DepartmentList.AddRange(DepartmentQuery.Distinct());
+            ViewBag.departments = new SelectList(DepartmentList);
+
+            var jobs = from j in db.Jobs
+                         select j;
+
+            if(!String.IsNullOrEmpty(search))
+            {
+                jobs = jobs.Where(s => s.Title.Contains(search));
+            }
+
+            if(!String.IsNullOrEmpty(test))
+            {
+                jobs = jobs.Where(x => x.Description == test);
+            }
+
+            return View(jobs);
+        }
+
+        [HttpPost]
+        public string Index(FormCollection fc, string search)
+        {
+            return "Hello " + search;
         }
 
         // GET: Jobs/Details/5
