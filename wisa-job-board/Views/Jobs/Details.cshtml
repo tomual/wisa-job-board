@@ -44,6 +44,7 @@
 
     </dl>
 </div>
+@Html.ActionLink("Apply", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
 <p>
     @if (Request.IsAuthenticated)
     {

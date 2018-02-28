@@ -10,6 +10,7 @@ using WisaJobBoard.Models;
 
 namespace WisaJobBoard
 {
+    [Authorize]
     public class ApplicationsController : Controller
     {
         private JobDBContext db = new JobDBContext();
@@ -36,8 +37,19 @@ namespace WisaJobBoard
         }
 
         // GET: Applications/Create
-        public ActionResult Create()
+        [AllowAnonymous]
+        public ActionResult Create(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Job = job;
             return View();
         }
 
@@ -46,7 +58,7 @@ namespace WisaJobBoard
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,firstName,lastName,email,phone,location,message,DateApplied")] Applications applications)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Phone,Location,Message,DateApplied")] Applications applications)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +90,7 @@ namespace WisaJobBoard
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,firstName,lastName,email,phone,location,message,DateApplied")] Applications applications)
+        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Phone,Location,Message,DateApplied")] Applications applications)
         {
             if (ModelState.IsValid)
             {
