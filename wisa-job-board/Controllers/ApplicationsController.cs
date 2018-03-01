@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -60,6 +61,16 @@ namespace WisaJobBoard
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Phone,Location,Message,DateApplied")] Applications applications)
         {
+            foreach (string upload in Request.Files)
+            {
+                if (Request.Files[upload].ContentLength == 0) continue;
+                string folder = Server.MapPath("~/Uploads/");
+                string name = Path.GetFileName(Request.Files[upload].FileName);
+                Console.WriteLine(name);
+                string path = Path.Combine(folder, name);
+                Request.Files[upload].SaveAs(path);
+                applications.ResumePath = path;
+            }
             if (ModelState.IsValid)
             {
                 db.Applications.Add(applications);
