@@ -127,6 +127,29 @@ namespace WisaJobBoard
             return View(applications);
         }
 
+
+        // GET: Applications/Edit/5
+        public ActionResult Download(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Applications applications = db.Applications.Find(id);
+            if (applications == null)
+            {
+                return HttpNotFound();
+            }
+            FileInfo file = new FileInfo(applications.ResumePath);
+            Response.ClearContent();
+            Response.AddHeader("Content-Disposition", String.Format("attachment; filename={0}", file.Name));
+            Response.AddHeader("Content-Length", file.Length.ToString());
+            Response.ContentType = "application/octet-stream";
+            Response.TransmitFile(file.FullName);
+            Response.End();
+            return View(applications);
+        }
+        
         // POST: Applications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
