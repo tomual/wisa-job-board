@@ -11,13 +11,14 @@
 <body>
     <header>
         <div class="container body-content">
-        <img src="http://acmelogos.com/images/logo-8.svg" />
+        <a href="/"><img src="http://acmelogos.com/images/logo-8.svg" /></a>
     </header>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
             <a href="#">Company Name Home Page</a>
+            @Html.Partial("_LoginPartial")
         </footer>
     </div>
 

@@ -25,6 +25,44 @@ textarea {
 }
 
 h2 {
+	display: inline-block;
 	font-size: 22px;
     font-family: 'PT Sans', sans-serif;
+}
+
+.job-list-item {
+	position: relative;
+	margin-bottom: 3rem;
+}
+
+.job-list-item h2 {
+	margin: 0;
+	margin-bottom: 1rem;
+}
+
+.job-list-item .details {
+}
+
+.job-list-item .btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.container {
+	width: 700px;
+}
+
+.navbar-nav > li > a {
+    padding: 0;
+    margin-left: 2rem;
+}
+
+
+.navbar-nav > li > a:hover {
+	background: transparent;
+}
+
+.filter {
+	margin: 4rem 0;
 }

@@ -4,12 +4,16 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Job</h4>
+<div class="job">
+    <h1>@Model.Title</h1>
+    <h2>@Model.Location</h2>
+    @Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
+
     <hr />
-    <dl class="dl-horizontal">
+    @Model.Description
+
+    <dl class="dl-horizontal hidden">
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -44,7 +48,7 @@
 
     </dl>
 </div>
-@Html.ActionLink("Apply", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
 <p>
     @if (Request.IsAuthenticated)
     {
