@@ -6,12 +6,19 @@
 
 
 <div class="job">
-    <h1>@Model.Title</h1>
-    <h2>@Model.Location</h2>
-    @Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
+    <div class="job-header">
+        <h1>@Model.Title</h1>
+        <h2>@Model.Location</h2>
+        @Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
+    </div>
 
     <hr />
-    @Model.Description
+    <div class="job-description">
+      @Html.Raw(Html.Encode(Model.Description).Replace("\n", "<br />"))
+    </div>
+   
+    <br />
+    @Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
 
     <dl class="dl-horizontal hidden">
         <dt>
@@ -48,7 +55,6 @@
 
     </dl>
 </div>
-@Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
 <p>
     @if (Request.IsAuthenticated)
     {

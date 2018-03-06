@@ -1,6 +1,4 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
     font-family: 'PT Sans', sans-serif;
 }
 
@@ -21,7 +19,11 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 360px;
+}
+
+form textarea.form-control {
+	min-height: 20rem;
 }
 
 h2 {
@@ -65,4 +67,39 @@ h2 {
 
 .filter {
 	margin: 4rem 0;
+}
+
+.job-header .btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.job-header {
+	position: relative;
+}
+
+.job > hr {
+	margin: 4rem 0;
+}
+
+.job > .btn {
+	margin: 4rem 0;
+}
+
+header {
+	padding: 4rem 0;
+}
+
+.job-header h2 {
+    opacity: 0.5;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.job-description {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
 }

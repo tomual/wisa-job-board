@@ -21,6 +21,7 @@ namespace WisaJobBoard.Models
         public string Location { get; set; }
 
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Date Posted")]
