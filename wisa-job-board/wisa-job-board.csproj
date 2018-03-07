@@ -231,8 +231,17 @@
     <Compile Include="Migrations\201802280327013_File3.Designer.cs">
       <DependentUpon>201802280327013_File3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803070439284_Application Changes.cs" />
+    <Compile Include="Migrations\201803070439284_Application Changes.Designer.cs">
+      <DependentUpon>201803070439284_Application Changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803070441106_Application instead of Applications.cs" />
+    <Compile Include="Migrations\201803070441106_Application instead of Applications.Designer.cs">
+      <DependentUpon>201803070441106_Application instead of Applications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Job.cs" />
@@ -350,6 +359,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802280327013_File3.resx">
       <DependentUpon>201802280327013_File3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803070439284_Application Changes.resx">
+      <DependentUpon>201803070439284_Application Changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803070441106_Application instead of Applications.resx">
+      <DependentUpon>201803070441106_Application instead of Applications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
