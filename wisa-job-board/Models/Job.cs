@@ -34,7 +34,7 @@ namespace WisaJobBoard.Models
     public class JobDBContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
-
-        public System.Data.Entity.DbSet<WisaJobBoard.Models.Applications> Applications { get; set; }
+        
+        public System.Data.Entity.DbSet<WisaJobBoard.Models.Application> Application { get; set; }
     }
 }

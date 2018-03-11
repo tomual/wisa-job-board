@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WisaJobBoard.Models.Applications>
+﻿@model IEnumerable<WisaJobBoard.Models.Application>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -24,10 +21,10 @@
             @Html.DisplayNameFor(model => model.Phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.DisplayNameFor(model => model.Message)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Message)
+            @Html.DisplayNameFor(model => model.ResumePath)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateApplied)
@@ -38,10 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Email)
@@ -50,10 +44,10 @@
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Location)
+            @Html.DisplayFor(modelItem => item.Message)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Message)
+            @Html.DisplayFor(modelItem => item.ResumePath)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateApplied)

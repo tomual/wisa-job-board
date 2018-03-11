@@ -19,7 +19,7 @@ namespace WisaJobBoard
         // GET: Applications
         public ActionResult Index()
         {
-            return View(db.Applications.ToList());
+            return View(db.Application.ToList());
         }
 
         // GET: Applications/Details/5
@@ -29,12 +29,12 @@ namespace WisaJobBoard
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Applications applications = db.Applications.Find(id);
-            if (applications == null)
+            Application application = db.Application.Find(id);
+            if (application == null)
             {
                 return HttpNotFound();
             }
-            return View(applications);
+            return View(application);
         }
 
         // GET: Applications/Create
@@ -59,7 +59,7 @@ namespace WisaJobBoard
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,Phone,Location,Message,DateApplied")] Applications applications)
+        public ActionResult Create([Bind(Include = "ID,FullName,Email,Phone,Message")] Application application)
         {
             foreach (string upload in Request.Files)
             {
@@ -69,16 +69,17 @@ namespace WisaJobBoard
                 Console.WriteLine(name);
                 string path = Path.Combine(folder, name);
                 Request.Files[upload].SaveAs(path);
-                applications.ResumePath = path;
+                application.ResumePath = path;
             }
+            application.DateApplied = DateTime.Now;
             if (ModelState.IsValid)
             {
-                db.Applications.Add(applications);
+                db.Application.Add(application);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(applications);
+            return View(application);
         }
 
         // GET: Applications/Edit/5
@@ -88,12 +89,12 @@ namespace WisaJobBoard
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Applications applications = db.Applications.Find(id);
-            if (applications == null)
+            Application application = db.Application.Find(id);
+            if (application == null)
             {
                 return HttpNotFound();
             }
-            return View(applications);
+            return View(application);
         }
 
         // POST: Applications/Edit/5
@@ -101,15 +102,25 @@ namespace WisaJobBoard
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,Phone,Location,Message,DateApplied")] Applications applications)
+        public ActionResult Edit([Bind(Include = "ID,FullName,Email,Phone,Message,DateApplied")] Application application)
         {
+            foreach (string upload in Request.Files)
+            {
+                if (Request.Files[upload].ContentLength == 0) continue;
+                string folder = Server.MapPath("~/Uploads/");
+                string name = Path.GetFileName(Request.Files[upload].FileName);
+                Console.WriteLine(name);
+                string path = Path.Combine(folder, name);
+                Request.Files[upload].SaveAs(path);
+                application.ResumePath = path;
+            }
             if (ModelState.IsValid)
             {
-                db.Entry(applications).State = EntityState.Modified;
+                db.Entry(application).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(applications);
+            return View(application);
         }
 
         // GET: Applications/Delete/5
@@ -119,14 +130,33 @@ namespace WisaJobBoard
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Applications applications = db.Applications.Find(id);
-            if (applications == null)
+            Application application = db.Application.Find(id);
+            if (application == null)
             {
                 return HttpNotFound();
             }
-            return View(applications);
+            return View(application);
         }
 
+        // POST: Applications/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Application application = db.Application.Find(id);
+            db.Application.Remove(application);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         // GET: Applications/Edit/5
         public ActionResult Download(int? id)
@@ -135,7 +165,7 @@ namespace WisaJobBoard
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Applications applications = db.Applications.Find(id);
+            Application applications = db.Application.Find(id);
             if (applications == null)
             {
                 return HttpNotFound();
@@ -148,26 +178,6 @@ namespace WisaJobBoard
             Response.TransmitFile(file.FullName);
             Response.End();
             return View(applications);
-        }
-        
-        // POST: Applications/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Applications applications = db.Applications.Find(id);
-            db.Applications.Remove(applications);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
