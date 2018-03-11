@@ -24,5 +24,7 @@ namespace WisaJobBoard.Models
         public string ResumePath { get; set; }
 
         public DateTime DateApplied { get; set; }
+
+        public Job Job { get; set; }
     }
 }

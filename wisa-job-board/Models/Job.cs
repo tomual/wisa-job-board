@@ -28,6 +28,8 @@ namespace WisaJobBoard.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DatePosted { get; set; }
+
+        public virtual ICollection<Application> Applications { get; set; }
         
     }
 

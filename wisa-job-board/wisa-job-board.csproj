@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201803111528009_Fix table name.Designer.cs">
       <DependentUpon>201803111528009_Fix table name.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803111604079_One-to-many Jobs and Applications.cs" />
+    <Compile Include="Migrations\201803111604079_One-to-many Jobs and Applications.Designer.cs">
+      <DependentUpon>201803111604079_One-to-many Jobs and Applications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Application.cs" />
@@ -385,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803111528009_Fix table name.resx">
       <DependentUpon>201803111528009_Fix table name.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803111604079_One-to-many Jobs and Applications.resx">
+      <DependentUpon>201803111604079_One-to-many Jobs and Applications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

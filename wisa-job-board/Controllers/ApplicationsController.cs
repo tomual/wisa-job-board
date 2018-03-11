@@ -19,7 +19,8 @@ namespace WisaJobBoard
         // GET: Applications
         public ActionResult Index()
         {
-            return View(db.Application.ToList());
+            var applications = db.Application.Include(a => a.Job);
+            return View(applications.ToList());
         }
 
         // GET: Applications/Details/5
@@ -59,8 +60,18 @@ namespace WisaJobBoard
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FullName,Email,Phone,Message")] Application application)
+        public ActionResult Create(int? id, [Bind(Include = "ID,FullName,Email,Phone,Message")] Application application)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Job job = db.Jobs.Find(id);
+            if (job == null)
+            {
+                return HttpNotFound();
+            }
+            application.Job = job;
             foreach (string upload in Request.Files)
             {
                 if (Request.Files[upload].ContentLength == 0) continue;
