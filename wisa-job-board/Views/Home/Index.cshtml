@@ -7,14 +7,15 @@
         @using (Html.BeginForm("Index", "", FormMethod.Get, new { @class = "form-inline" }))
         {
             <label>Filter:</label>
-            @Html.DropDownList("locations", null, "All", new { @class = "form-control filter" })
+            @Html.DropDownList("location", null, "All locations", new { @class = "form-control filter" })
+            @Html.DropDownList("department", null, "All departments", new { @class = "form-control filter" })
             <input class="btn btn-default" type="submit" value="Filter" />
         }
         @foreach (var job in ViewBag.Jobs)
         {
             <div class="job-list-item">
                 <a href="/Jobs/Details/@job.ID"><h2>@job.Title</h2></a>
-                <div class="details">@job.Location</div>
+                <div class="details"><span>@job.Location</span> &middot; <span>@job.Department</span></div>
                 <a href="/Applications/Create/@job.ID" class="btn btn-primary">Apply</a>
             </div>
         }
