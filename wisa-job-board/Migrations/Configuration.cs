@@ -33,6 +33,7 @@ namespace WisaJobBoard.Migrations
                 {
                     Title = "IT Manager",
                     Location = "Adelaide",
+                    Department = "Information Technology",
                     DatePosted = DateTime.Parse("2018-02-01"),
                     Description = "We are looking for an IT Manager"
                 },
@@ -40,20 +41,23 @@ namespace WisaJobBoard.Migrations
                 {
                     Title = "Accountant",
                     Location = "Adelaide",
+                    Department = "Accounting",
                     DatePosted = DateTime.Parse("2018-02-10"),
                     Description = "We are looking for an IT Manager"
                 },
                 new Job
                 {
                     Title = "Project Manager",
-                    Location = "Adelaide",
+                    Location = "Sydney",
+                    Department = "Management",
                     DatePosted = DateTime.Parse("2018-02-11"),
                     Description = "We are looking for an IT Manager"
                 },
                 new Job
                 {
                     Title = "Python Developer",
-                    Location = "Adelaide",
+                    Location = "Perth",
+                    Department = "Information Technology",
                     DatePosted = DateTime.Parse("2018-02-23"),
                     Description = "We are looking for an IT Manager"
                 }

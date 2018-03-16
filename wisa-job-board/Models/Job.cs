@@ -17,8 +17,10 @@ namespace WisaJobBoard.Models
         public string Title { get; set; }
 
         [Required]
-        [StringLength(30)]
         public string Location { get; set; }
+
+        [Required]
+        public string Department { get; set; }
 
         [Required]
         [DataType(DataType.MultilineText)]
