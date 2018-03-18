@@ -87,10 +87,15 @@ namespace WisaJobBoard
             {
                 db.Application.Add(application);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Submitted");
             }
 
             return View(application);
+        }
+
+        public ActionResult Submitted()
+        {
+            return View();
         }
 
         // GET: Applications/Edit/5

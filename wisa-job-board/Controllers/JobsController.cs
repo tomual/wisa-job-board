@@ -101,7 +101,7 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,Department,atePosted")] Job job)
+        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,Department,DatePosted")] Job job)
         {
             if (ModelState.IsValid)
             {

@@ -58,6 +58,21 @@ h2 {
     font-family: 'PT Sans', sans-serif;
 }
 
+.job {
+    margin-top: 3rem;
+}
+
+ h1 {
+    color: #5B7876;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'PT Sans', sans-serif;
+    margin: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+}
+
 .job-list-item {
 	position: relative;
 	margin-bottom: 3rem;
@@ -97,6 +112,12 @@ h2 {
 }
 
 
+.job .details {
+    text-transform: uppercase;
+    color: #999999ad;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
 
 .navbar-nav > li > a:hover {
@@ -118,7 +139,7 @@ h2 {
 }
 
 .job > hr {
-	margin: 4rem 0;
+	margin: 3rem 0;
 }
 
 .job > .btn {
@@ -148,3 +169,7 @@ header {
     margin-left: 4px;
 }
 
+
+footer {
+	padding-bottom: 3rem;
+}

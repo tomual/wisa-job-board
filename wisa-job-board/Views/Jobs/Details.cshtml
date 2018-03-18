@@ -8,7 +8,7 @@
 <div class="job">
     <div class="job-header">
         <h1>@Model.Title</h1>
-        <h2>@Model.Location @Model.Department</h2>
+        <div class="details">@Model.Location &middot; @Model.Department</div>
         @Html.ActionLink("Apply for Position", "Create", "Applications", new { id = Model.ID }, new { @class = "btn btn-primary" })
     </div>
 
@@ -70,5 +70,5 @@
             @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         </span>
     }
-    @Html.ActionLink("Back to Posting", "Index", "Home", null, null)
+    @Html.ActionLink("Back to Jobs", "Index", "Home", null, null)
 </p>
