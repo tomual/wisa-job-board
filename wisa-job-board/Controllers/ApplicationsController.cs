@@ -84,7 +84,6 @@ namespace WisaJobBoard
             }
             else
             {
-
                 string folder = Server.MapPath("~/Uploads/");
                 string name = Path.GetFileName(Request.Files["file"].FileName);
                 Console.WriteLine(name);
