@@ -1,15 +1,14 @@
 ﻿@model WisaJobBoard.Models.Application
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.FullName;
 }
 
-<h2>Details</h2>
+<h2>@Model.FullName</h2>
 
 <div>
-    <h4>Application</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal application">
         <dt>
             @Html.DisplayNameFor(model => model.FullName)
         </dt>
@@ -47,7 +46,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResumePath)
+            <a href="@Model.ResumePath" class="btn">Download</a>
         </dd>
 
         <dt>

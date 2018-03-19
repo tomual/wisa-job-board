@@ -21,8 +21,10 @@ namespace WisaJobBoard.Models
         [DataType(DataType.MultilineText)]
         public string Message { get; set; }
 
+        [Display(Name = "Resume")]
         public string ResumePath { get; set; }
 
+        [Display(Name = "Date Applied")]
         public DateTime DateApplied { get; set; }
 
         public Job Job { get; set; }

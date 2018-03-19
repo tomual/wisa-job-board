@@ -17,9 +17,15 @@ namespace WisaJobBoard
         private JobDBContext db = new JobDBContext();
 
         // GET: Applications
-        public ActionResult Index()
+        public ActionResult Index(int? jobId)
         {
             var applications = db.Application.Include(a => a.Job);
+
+            if (jobId.HasValue)
+            {
+                applications = applications.Where(a => a.Job.ID == jobId);
+            }
+
             return View(applications.ToList());
         }
 
@@ -80,7 +86,7 @@ namespace WisaJobBoard
                 Console.WriteLine(name);
                 string path = Path.Combine(folder, name);
                 Request.Files[upload].SaveAs(path);
-                application.ResumePath = path;
+                application.ResumePath = name;
             }
             application.DateApplied = DateTime.Now;
             if (ModelState.IsValid)

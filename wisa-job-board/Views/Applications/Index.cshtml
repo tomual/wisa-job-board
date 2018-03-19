@@ -6,25 +6,13 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Job.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResumePath)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateApplied)
@@ -39,26 +27,20 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Job.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResumePath)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateApplied)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("View", "Details", new { id = item.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
             </td>
         </tr>
     }
-
 </table>
+
+
+<p>
+    @Html.ActionLink("Back to Jobs", "Index", "Jobs", null, null)
+</p>
