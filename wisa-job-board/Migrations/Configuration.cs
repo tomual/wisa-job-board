@@ -28,6 +28,8 @@ namespace WisaJobBoard.Migrations
             //    );
             //
 
+            context.Application.RemoveRange(context.Application);
+
             context.Jobs.AddOrUpdate(i => i.Title,
                 new Job
                 {

@@ -9,9 +9,16 @@
 <div>
     <hr />
     <dl class="dl-horizontal application">
+
         <dt>
-            @Html.DisplayNameFor(model => model.FullName)
+            Posting
         </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job.Title)
+        </dd>
+        <dt>
+            Name
 
         <dd>
             @Html.DisplayFor(model => model.FullName)
@@ -46,7 +53,14 @@
         </dt>
 
         <dd>
-            <a href="@Model.ResumePath" class="btn">Download</a>
+            @if (!Model.ResumePath.IsEmpty())
+            {
+                @Html.ActionLink("Download", "Download", new { id = Model.ID }, new { @class = "btn" })
+            }
+            else
+            {
+                <i>No Resume</i>
+            }
         </dd>
 
         <dt>
@@ -55,14 +69,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.DateApplied)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Job.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Job.Title)
         </dd>
 
     </dl>

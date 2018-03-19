@@ -14,6 +14,7 @@ namespace WisaJobBoard.Models
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
+        [Required]
         public string Email { get; set; }
 
         public string Phone { get; set; }

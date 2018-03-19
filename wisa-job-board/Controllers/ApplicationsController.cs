@@ -36,7 +36,7 @@ namespace WisaJobBoard
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Application.Find(id);
+            Application application = db.Application.Include(a => a.Job).SingleOrDefault(a => a.ID == id);
             if (application == null)
             {
                 return HttpNotFound();
@@ -78,15 +78,19 @@ namespace WisaJobBoard
                 return HttpNotFound();
             }
             application.Job = job;
-            foreach (string upload in Request.Files)
+            if (Request.Files["file"].ContentLength == 0)
             {
-                if (Request.Files[upload].ContentLength == 0) continue;
+                ModelState.AddModelError("ResumePath", "Please upload file");
+            }
+            else
+            {
+
                 string folder = Server.MapPath("~/Uploads/");
-                string name = Path.GetFileName(Request.Files[upload].FileName);
+                string name = Path.GetFileName(Request.Files["file"].FileName);
                 Console.WriteLine(name);
                 string path = Path.Combine(folder, name);
-                Request.Files[upload].SaveAs(path);
-                application.ResumePath = name;
+                Request.Files["file"].SaveAs(path);
+                application.ResumePath = path;
             }
             application.DateApplied = DateTime.Now;
             if (ModelState.IsValid)
@@ -96,6 +100,7 @@ namespace WisaJobBoard
                 return RedirectToAction("Submitted");
             }
 
+            ViewBag.Job = job;
             return View(application);
         }
 
