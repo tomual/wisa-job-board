@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Company Name Careers</title>
+    <title>@ViewBag.Title - @System.Configuration.ConfigurationManager.AppSettings["CompanyName"]</title>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -11,13 +11,13 @@
 <body>
     <header>
         <div class="container body-content">
-        <a href="/"><img src="http://acmelogos.com/images/logo-8.svg" /></a>
+        <a href="/"><img src="@Url.Content("~/Content/Images/" + System.Configuration.ConfigurationManager.AppSettings["Logo"])" /></a>
     </header>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <a href="#">Company Name Home Page</a>
+            <a href="@System.Configuration.ConfigurationManager.AppSettings["CompanyWebsite"]">@System.Configuration.ConfigurationManager.AppSettings["CompanyName"]</a>
             @Html.Partial("_LoginPartial")
         </footer>
     </div>
