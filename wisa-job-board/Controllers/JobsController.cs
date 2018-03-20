@@ -16,15 +16,23 @@ namespace WisaJobBoard.Controllers
 
         // GET: Jobs
         [AllowAnonymous]
-        public ActionResult Index(string search, string location)
+        public ActionResult Index(string search, string location, string department)
         {
             var LocationList = new List<string>();
             var LocationQuery = from d in db.Jobs
-                            orderby d.Location
-                            select d.Location;
-
+                                orderby d.Location
+                                select d.Location;
             LocationList.AddRange(LocationQuery.Distinct());
-            ViewBag.locations = new SelectList(LocationList);
+            SelectList locationSelect = new SelectList(LocationList);
+            ViewBag.location = locationSelect;
+
+            var DepartmentList = new List<string>();
+            var DepartmentQuery = from d in db.Jobs
+                                  orderby d.Department
+                                  select d.Department;
+            DepartmentList.AddRange(DepartmentQuery.Distinct());
+            SelectList departmentSelect = new SelectList(DepartmentList);
+            ViewBag.department = departmentSelect;
 
             var jobs = from j in db.Jobs
                          select j;
@@ -34,7 +42,12 @@ namespace WisaJobBoard.Controllers
                 jobs = jobs.Where(s => s.Title.Contains(search));
             }
 
-            if(!String.IsNullOrEmpty(location))
+            if (!String.IsNullOrEmpty(department))
+            {
+                jobs = jobs.Where(x => x.Department == department);
+            }
+
+            if (!String.IsNullOrEmpty(location))
             {
                 jobs = jobs.Where(x => x.Location == location);
             }
@@ -69,8 +82,9 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Location,Description,Department,DatePosted")] Job job)
+        public ActionResult Create([Bind(Include = "ID,Title,Location,Description,Department")] Job job)
         {
+            job.DatePosted = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Jobs.Add(job);
@@ -101,7 +115,7 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,Department,DatePosted")] Job job)
+        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,Department")] Job job)
         {
             if (ModelState.IsValid)
             {
