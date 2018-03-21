@@ -115,8 +115,9 @@ namespace WisaJobBoard.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,Department")] Job job)
+        public ActionResult Edit([Bind(Include = "ID,Title,Location,Description,DatePosted,Department")] Job job)
         {
+            Console.WriteLine(job.DatePosted);
             if (ModelState.IsValid)
             {
                 db.Entry(job).State = EntityState.Modified;
@@ -147,6 +148,11 @@ namespace WisaJobBoard.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Job job = db.Jobs.Find(id);
+            for (int i = 0; i < job.Applications.Count; i++)
+            {
+                var application = job.Applications.ToArray()[i];
+                job.Applications.Remove(application);
+            }
             db.Jobs.Remove(job);
             db.SaveChanges();
             return RedirectToAction("Index");
